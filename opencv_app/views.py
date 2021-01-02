@@ -2,11 +2,11 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import redirect
-#from .forms import UploadImageForm
+from .forms import UploadImageForm
 from django.core.files.storage import FileSystemStorage
-#from .forms import ImageUploadForm
+from .forms import ImageUploadForm
 from django.conf import settings
-#from .opencv_dface import opencv_dface
+from .opencv_dface import opencv_dface
 from .models import ImageUploadModel
 
 def first_view(request):
@@ -40,7 +40,7 @@ def dface(request):
                     obs.delete()
 
             imageURL = settings.MEDIA_URL + form.instance.document.name
-            opencv_dface(settings.MEDIA_ROOT_URL + imageURL)
+            opencv_dface(settings.MEDIA_ROOT_URL + imageURL) #opencv face detection
 
             return render(request, 'opencv_app/dface.html', {'form': form, 'post': post})
     else:
